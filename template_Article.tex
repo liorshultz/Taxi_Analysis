@@ -1,0 +1,49 @@
+\documentclass[]{article}
+
+
+\newcommand{\rand}{ $ RAND \frac{1}{2} $ }
+
+%opening
+\title{A Tale of Two Cities}
+\author{Prof. Yishay Mansour, Mr. Lior Shultz}
+
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+We consider the following problem to achieve a basic understanding of taxi driver on-line decisions:
+	We have two cities and jobs arrive one after another and the taxi driver can decide for each job if he wants to pick up the passenger or forfeit the job.
+	Accepting a job yields the driver a reward of $ 1 $. However, accepting a job in a different city means that the driver will have to drive to the other city and pay $ 1 $ for the relocation - effectively earning nothing for the fare.
+
+\end{abstract}
+
+\section{Notation}
+
+We will denote the following:
+
+1. $ T $ - The number of total jobs received.
+
+2. $ L , R $ - The two cities.
+
+\section{Deterministic Algorithm}
+
+The simple problem of a deterministic algorithm is largely uninteresting in this case since we can at each point in the algorithm a job can hail from the other city meaning that the $ ALG $ will receive $ 0 $ profit. $ OPT $ however will get at the very least a profit of $ \frac{T}{2} $ at least by simply choosing the city that has more jobs in it and staying there. This means that any deterministic algorithm can't achieve any finite competitive ratio.
+
+\section{Online simple strategies}
+
+We will discuss the following two simple strategies:
+
+1. $ STAY $ - At the beginning we will use a coin to decide on a city and simply stay there for the rest of the algorithm. It is easy to see that this algorithm is expected to earn $ \frac{T}{2} $.
+
+2. \rand - Every turn of the algorithm if the job is in a different city we will flip a coin and move to that city with probability $ \frac{1}{2} $. If the job is in the city we are already in we will of course accept it along with our reward.
+
+\section{Rand Analysis}
+
+Let's look at a possible way of analyzing the profit of the \rand algorithm. At time $ t $ we have a probability of $ p $ of being in $ R $ at the beginning of the turn and probability of $ 1 - p $ of being in $ L $ at the beginning of the turn. This means that we can expect to earn $ p $ and update the probability of being at $ R $ at time $ t + 1 $ to $ p + \frac{1}{2} \dot ( 1 - p ) = \frac{1}{2} + \frac{1}{2}p$ and the probability of being at $ L $ to $ \frac{1}{2} \dot ( 1 - p ) $. In the case of consistently alternating jobs (the job sequence consisting of $ L, R, L, R, L, \ldots $) we can see that a balance is achieved when $ p = \frac{1}{3} $. This can be easily demonstrated by the fact that through simple calculation we can see that the probabilities are swapped after the job arrives at $ R $ and thus they can continuously swap and remain balanced that way. This means that in every step we will earn exactly $ \frac{1}{3} $ achieving a total expected revenue of $ \frac{T}{3} $ compared to the $ \frac{T}{2} $ of $ OPT $.
+
+\end{document}
