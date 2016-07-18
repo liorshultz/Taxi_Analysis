@@ -1,13 +1,16 @@
 \documentclass[]{article}
 
+\usepackage{mathtools} % Bonus
+
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+
+\newtheorem{theorem}{Theorem}
 
 \newcommand{\rand}{ $ RAND \frac{1}{2} $ }
 
 %opening
 \title{A Tale of Two Cities}
-\author{Prof. Yishay Mansour, Mr. Lior Shultz}
-
-
+\author{Prof. Yishay Mansour, Prof. Amos Fiat, Mr. Lior Shultz}
 
 
 \begin{document}
@@ -40,7 +43,29 @@ We will denote the following:
 
 \section{Deterministic Algorithm}
 
-The simple problem of a deterministic algorithm is largely uninteresting in this case since we can at each point in the algorithm a job can hail from the other city meaning that the $ ALG $ will receive $ 0 $ profit. $ OPT $ however will get at the very least a profit of $ \frac{T}{2} $ at least by simply choosing the city that has more jobs in it and staying there. This means that any deterministic algorithm can't achieve any finite competitive ratio.
+\begin{theorem}
+	For any deterministic algorithm there exists a sequence for which the algorithm receives a reward of $ 0 $.
+\end{theorem}
+
+\begin{proof}
+	If we consider $ ALG $ at time $ t $ we will notice that we can compute $ d_t $ since it only depends on $ J_1,J_2 \cdots J_{t-1} $ thus we can simply create a new job $ J_t $ so that $ J_t \neq d_t $. This way at time $ t $ the reward will be $ 0 $ and this can be done for every $ t $ gaining a total of $ 0 $ for the entire algorithm.
+\end{proof}
+
+\begin{theorem}
+	
+	For every sequence $ J_1,J_2 \cdots J_t $ we get $ OPT > \frac{T}{2} $.
+	
+\end{theorem}
+\begin{proof}
+	
+	Since $ | \{ t | J_t = L \} | + | \{ t | J_t = R \} | = T $ then either $ | \{ t | J_t = L \} | \geq 
+\frac{1}{2} $ or $ | \{ t | J_t = R \} | \geq 
+\frac{1}{2} $ and so $ OPT $ can just pick the one that is greater and remain there receiving a reward of at least $ \frac{T}{2} $
+
+\end{proof}
+
+These two theorems prove together that no finite competitive ratio can be achieved for any deterministic algorithm.
+
 
 \section{Online simple strategies}
 
