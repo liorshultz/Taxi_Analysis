@@ -30,6 +30,14 @@ We will denote the following:
 
 2. $ L , R $ - The two cities.
 
+3. $ p_{t,L} $ - The probability of the taxi being at city $ L $ at time $ t $ of our algorithm.
+
+4. $ p_{t,R} $ - The probability of the taxi being at city $ R $ at time $ t $ of our algorithm. We will notice that always $ p_{t,L} + p_{t,R} = 1 $.
+
+5. A turn is defined by first receiving a job request and then the decision as to how to act upon that request. We will denote the city the driver decided to go to in time $ t $ as $ d_t $.
+
+6. We will denote the job received at time $ t $ as $ J_t \in \{L,R\} $ 
+
 \section{Deterministic Algorithm}
 
 The simple problem of a deterministic algorithm is largely uninteresting in this case since we can at each point in the algorithm a job can hail from the other city meaning that the $ ALG $ will receive $ 0 $ profit. $ OPT $ however will get at the very least a profit of $ \frac{T}{2} $ at least by simply choosing the city that has more jobs in it and staying there. This means that any deterministic algorithm can't achieve any finite competitive ratio.
