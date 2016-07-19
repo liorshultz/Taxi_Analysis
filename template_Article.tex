@@ -31,15 +31,15 @@ We will denote the following:
 
 1. $ T $ - The number of total jobs received.
 
-2. $ L , R $ - The two cities.
+2. $ 1 , 2 $ - The two cities.
 
-3. $ p_{t,L} $ - The probability of the taxi being at city $ L $ at time $ t $ of our algorithm.
+3. $ p_{t,1} $ - The probability of the taxi being at city $ L $ at time $ t $ of our algorithm.
 
-4. $ p_{t,R} $ - The probability of the taxi being at city $ R $ at time $ t $ of our algorithm. We will notice that always $ p_{t,L} + p_{t,R} = 1 $.
+4. $ p_{t,2} $ - The probability of the taxi being at city $ R $ at time $ t $ of our algorithm. We will notice that always $ p_{t,1} + p_{t,2} = 1 $.
 
 5. A turn is defined by first receiving a job request and then the decision as to how to act upon that request. We will denote the city the driver decided to go to in time $ t $ as $ d_t $.
 
-6. We will denote the job received at time $ t $ as $ J_t \in \{L,R\} $ 
+6. We will denote the job received at time $ t $ as $ J_t \in \{1,2\} $ 
 
 \section{Deterministic Algorithm}
 
@@ -58,8 +58,8 @@ We will denote the following:
 \end{theorem}
 \begin{proof}
 	
-	Since $ | \{ t | J_t = L \} | + | \{ t | J_t = R \} | = T $ then either $ | \{ t | J_t = L \} | \geq 
-\frac{1}{2} $ or $ | \{ t | J_t = R \} | \geq 
+	Since $ | \{ t | J_t = 1 \} | + | \{ t | J_t = 2 \} | = T $ then either $ | \{ t | J_t = 1 \} | \geq 
+\frac{1}{2} $ or $ | \{ t | J_t = 2 \} | \geq 
 \frac{1}{2} $ and so $ OPT $ can just pick the one that is greater and remain there receiving a reward of at least $ \frac{T}{2} $
 
 \end{proof}
@@ -77,6 +77,6 @@ We will discuss the following two simple strategies:
 
 \section{Rand Analysis}
 
-Let's look at a possible way of analyzing the profit of the \rand algorithm. At time $ t $ we have a probability of $ p $ of being in $ R $ at the beginning of the turn and probability of $ 1 - p $ of being in $ L $ at the beginning of the turn. This means that we can expect to earn $ p $ and update the probability of being at $ R $ at time $ t + 1 $ to $ p + \frac{1}{2} \dot ( 1 - p ) = \frac{1}{2} + \frac{1}{2}p$ and the probability of being at $ L $ to $ \frac{1}{2} \dot ( 1 - p ) $. In the case of consistently alternating jobs (the job sequence consisting of $ L, R, L, R, L, \ldots $) we can see that a balance is achieved when $ p = \frac{1}{3} $. This can be easily demonstrated by the fact that through simple calculation we can see that the probabilities are swapped after the job arrives at $ R $ and thus they can continuously swap and remain balanced that way. This means that in every step we will earn exactly $ \frac{1}{3} $ achieving a total expected revenue of $ \frac{T}{3} $ compared to the $ \frac{T}{2} $ of $ OPT $.
+Let's look at a possible way of analyzing the profit of the \rand algorithm. At time $ t $ we have a probability of $ p_{t.1} $ of being in $ 1 $ at the beginning of the turn and probability of $ 1 - p_{t,2} $ of being in $ 2 $ at the beginning of the turn. This means that we can expect to earn $ p_{t,1} $ and update the probability of being at $ 1 $ at time $ t + 1 $ to $ p_{t+1,1} = p_{t,1} + \frac{1}{2} \dot ( 1 - p_{t,1} ) = \frac{1}{2} + \frac{1}{2}p_{t,1}$ and the probability of being at $ 2 $ to $ \frac{1}{2} \dot ( 1 - p_{t,1} ) $. In the case of consistently alternating jobs (the job sequence consisting of $ 1, 2, 1, 2, 1, \ldots $) we can see that a balance is achieved when $ p_{t,1} = \frac{1}{3} $. This is because we expect the tables to turn after the turn is finished due to symmetry meaning we expect $ p_{t+1,2} = p_{t,1} $ and from this we get $ p_{t,1} = p_{t+1,2} = \frac{1}{2}(1 - p_{t,1}) $ and hence $ p_{t,1} = \frac{1}{3} $. This means that in every step we will earn exactly $ \frac{1}{3} $ achieving a total expected revenue of $ \frac{T}{3} $ compared to the $ \frac{T}{2} $ of $ OPT $.
 
 \end{document}
