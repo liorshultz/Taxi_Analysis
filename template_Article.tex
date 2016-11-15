@@ -122,6 +122,21 @@ $ ALG $ - The algorithm starts at $ J_1 $ and for every step if $ J_{t+1} = d_{t
 	will be able to surpass $ ALG $ meaning that $ ALG $ is also optimal.
 \end{proof}
 
+\section{Proving a ratio smaller than 2}
+
+\begin{proof}[For every unit $ OPT $ loses \rand loses no more than $ 2 $ units]
+
+That is, if $ OPT $ earns $ T - n $ for some $ n \ge 0 $ then \rand earns at least $ T - 2 \cdot n $.
+proof sketch: If we shift for $ 2 $ or more turns then $ OPT $ loses $ 2 $ units and then because of the way
+rand works during each shift we will only lose $ 1 $ (use a geometric series for the probabilities with 1/2).
+If we shift for only $ 1 $ turn then $ OPT $ will lose $ 1 $ (first point after shift we will lose half of $ p $
+and after that quarter $ p $ etc.)
+
+\end{proof}
+
+Let us present a class of algorithms - defined by a parameter $ 0 \le \gamma \le 1 $.
+For every such $ \gamma $ we will define the algorithm as follows:
+At the beginning of the sequence with probability $ \gamma $ execute algorithm \rand and otherwise execute $ STAY $. This means that if for a given sequence $ OPT $ has earned $ T - n $ then we can expect our new algorithm to earn $ \gamma \cdot (T - 2n) + (1 - \gamma) \cdot \frac{T}{2} $. This means that if we want to achieve a ratio of $ a $ then we will try to solve the equation - $ T - n \leq a \cdot (\gamma \cdot (T - 2n) + (1 - \gamma) \cdot \frac{T}{2}) $. Solving this equation by making sure the coefficients of $ T $ and $ n $ are equal on both sides will net us $ \gamma = \frac{2}{3} , a = \frac{3}{2} $. This means that we have achieved a competitive ratio of $ \frac{3}{2} $ and specifically managed to improve on the ratio of $ 2 $ originally proposed.
 
 \section{The K-City Problem}
 
